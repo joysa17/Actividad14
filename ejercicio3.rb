@@ -1,5 +1,6 @@
 list = [{ nombre: "Joselin", edad: 29, comuna: "Peñalolén", genero: "Femenino"}]
 
+#1
 def add_person(array)
   puts 'Ingrese nombre'
   name = gets.chomp
@@ -14,6 +15,7 @@ def add_person(array)
   puts
 end
 
+#2
 def edit_person(people)
   puts "Ingrese el nombre de la persona"
   name = gets.chomp
@@ -23,6 +25,70 @@ def edit_person(people)
   puts elegido
   add_person(people)
 end
+
+#3
+def delete_person(people)
+  puts "Ingrese un nombre de una persona que desea eliminar"
+  nombre = gets.chomp
+  elegido = people.delete_if { |person| person[:nombre] == nombre }
+  puts 'Usuario eliminado'
+  puts elegido
+end
+
+#4 Mostrar la cantidad de personas en el sistema
+def view_array(array)
+  puts "La cantidad de personas en el sistema es de:"
+  puts array.count
+  
+end
+#5 falta
+def commune_array(people)
+  puts "Las comunas son:"
+  elegido = people.select { |commune| commune[:comuna]}
+  puts elegido
+  puts people
+end
+
+#6 Mostrar lista de personas entre 20 y 25 años'
+def show_age_range(array)
+  array.select do |ele|
+    puts ele[:nombre] if ele[:edad] >= 20 && ele[:edad] <= 25
+  end
+end
+
+def show_ages(array)
+  array.select do |ele|
+    puts "#{ele[:nombre]} tiene #{ele[:edad]} años."
+  end
+end
+
+ 
+def sum_age(array)
+  max = array.max_by {|key, value| value}
+  puts "El producto con mayor stock es: #{max[0].to_s}"
+  puts array
+  puts max
+end
+
+#8 promedio
+def age_average(array)
+  suma = array.inject(0) { |sum, e| sum + e[:edad] }
+  i = 0
+  array.each { i += 1 }
+  print "El promedio de las edades es #{suma}.", "\n"
+end
+
+
+#9
+def gender(people)
+  puts "Los alumnos por genero son:"
+  elegido = people.select { |gender| gender[:genero]}
+  puts elegido
+  puts people
+end
+
+
+
 
 puts 'Bienvenido al Sistema de Gestión de Alumnos!, seleccione su opción:'
 
@@ -49,13 +115,19 @@ while option != 10
   when 2
     edit_person(list)
   when 3
-    puts 'eligio 3'
+    delete_person(list)
   when 4
-    puts 'eligio 4'
+    view_array(list)
   when 5
-    puts 'eligio 5'
+    commune_array(list)
   when 6
-    puts 'eligio 6'
+    show_age_range(list)
+  when 7
+    show_ages(list)
+  when 8 
+    age_average(list)
+  when 9
+    gender(list)
   when 10
     puts 'Adios!'
   else
